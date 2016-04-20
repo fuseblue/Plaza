@@ -731,14 +731,12 @@
                         {/block:Answer}
                         
                         
-                        <!-- dont show on normal page -->
+                        {block:Date}
                             <div class="post-meta cl">
                                 <div class="meta left">
-                                    {block:Date}
-                                        <a href="{Permalink}" class="meta-date">
-                                            <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{DayOfMonth}{DayOfMonthSuffix} {Month} {Year}</time> 
-                                        </a>
-                                    {/block:Date}
+                                    <a href="{Permalink}" class="meta-date">
+                                        <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{DayOfMonth}{DayOfMonthSuffix} {Month} {Year}</time> 
+                                    </a>
                                     {block:NoteCount} 
                                         <a href="{Permalink}" class="meta-notes">{NoteCountWithLabel}</a>
                                     {/block:NoteCount}
@@ -763,8 +761,7 @@
                                     <ul class="tags">{block:Tags}<li> <a href="{TagURL}">#{Tag}</a> </li>{/block:Tags}</ul>
                                 {/block:HasTags}    
                             </div>
-                        <!-- dont show on normal page -->
-                        
+                        {/block:Date}
                     </article>
                             
                     {block:NoteCount}
