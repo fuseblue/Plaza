@@ -45,9 +45,9 @@
             <meta name="text:Email Address" content=""/>
             <!-- Nav -->
             <meta name="if:Navigation" content="1"/>  
-            <meta name="if:Random Link" content="1"/>    
-            <meta name="if:Archive Link" content="1"/>    
-            <meta name="if:RSS Link" content="1"/> 
+            <meta name="if:Random Link" content="0"/>    
+            <meta name="if:Archive Link" content="0"/>    
+            <meta name="if:RSS Link" content="0"/> 
             <meta name="text:Link 1 Name" content=""/>
             <meta name="text:Link 1 URL" content=""/>
             <meta name="text:Link 2 Name" content=""/>
@@ -81,7 +81,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://static.tumblr.com/b5aw2yz/VW3nj01lh/twemoji-awesome.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family={select:Font}:400,400italic,700,700italic">
-        <link rel="stylesheet" href="http://static.tumblr.com/evx2wil/bVco5zll1/ants-core.css">
+        <link rel="stylesheet" href="http://static.tumblr.com/evx2wil/n9io658nm/ants-core.css">
 
 
         <style type="text/css">
@@ -106,7 +106,7 @@
                 color: {color:Text};
                 background-color: {BackgroundColor};
             }
-            a {
+            a, .post-meta .post-like {
                 color: {color:Link};
                 text-decoration: none;
             }
@@ -173,6 +173,9 @@
                 line-height: 1;
                 margin: 0;
             }
+            .blog-title a {
+                color:{TitleColor};
+            }
             .fuse-header nav {
                 padding: 15px 0;
             }
@@ -190,7 +193,7 @@
                 margin: 0;
             }
             .fuse-header nav ul a {
-                color: {color:Link};
+                color: {TitleColor};
             }
             .fuse-header nav ul a:hover {
                 color: {color:Link Hover};
@@ -213,6 +216,23 @@
             .fuse-header .head .description {
                 margin: 35px 0 0;
             }
+            
+            .post {
+                border: 5px solid {color:Text};
+                background: {BackgroundColor};
+                transition: top .5s ease-in-out;
+            }
+            
+            .asker-box {
+                background: {color:Text};
+                padding: 3px 0 8px 4px;
+                color: {BackgroundColor};
+            }
+            
+            .asker {
+                color:{BackgroundColor}};
+            }
+            
             /* Modal */
             .fuse-container {
             }
@@ -222,7 +242,7 @@
                 left: 50%;
                 transform: translate(-50%,-50%);
                 /*overflow: hidden;*/
-                color: #525252;
+                color: {color:Text};
                 /*width: 100%;*/
                 /*height: auto;*/
                 transition: top .4s, left .4s, right .4s, transform .4s, width .4s;
@@ -244,7 +264,7 @@
             .fuse-back-btn {
                 padding: 20px 0;
                 font-size: 12px;
-                color: #ccc;
+                color: {color:Text};
                 font-weight: bold;
                 text-transform: uppercase;
                 text-align: center;
@@ -252,11 +272,11 @@
                 display: none;
             }
             .fuse-back-btn svg {
-                fill: #111;
+                fill: {color:Link};
                 transition: .2s all;
             }
             .fuse-back-btn:hover svg {
-                fill:  #111;
+                fill:  {color:Link Hover};
                 transition: .2s all;
             }
             .fuse-border-left, .fuse-border-right {
@@ -269,7 +289,7 @@
                 text-transform: uppercase;
                 cursor: pointer;
                 font-size: 15px;
-                color: #3D3D3D;
+                color: {color:Link};
             }
             @media (max-width: 550px) {
                 .fuse-border-left, .fuse-border-right {
@@ -289,7 +309,13 @@
                 margin: 0 10px 0 0;
             }
             .fuse-border-left svg, .fuse-border-right svg {
-                 fill: #3D3D3D!important;
+                 fill: {color:Link}; !important;
+            }
+            .note-count {
+                color:{color:Link};
+            }
+            blockquote {
+                border-left: 5px solid {color:Link};
             }
             @media (max-width: 550px) {
                 .fuse-border-left svg, .fuse-border-right svg {
@@ -386,7 +412,7 @@
                 top: 0;
                 left: -100vw;
                 z-index: 1;
-                color: #666666;
+                color: {color:Text};
                 text-align: left;
                 width: 50vw;
                 height: 100vh;
@@ -413,7 +439,7 @@
                 overflow: visible;
             }
             .fuse-caption a {
-                color: #999999;
+                color: {color:Link};
             }
             .fuse-caption .caption {
                 font-size: 14px;
@@ -443,6 +469,10 @@
             .fuse-overlay.visible {
                 z-index: 999999;
                 opacity: 0;
+            }
+            #fuse-post-loader {
+                background: {color:Text};
+                color: {BackgroundColor}
             }
             html.modal-open {
                 overflow-y: hidden;
@@ -772,6 +802,7 @@
                                     </li>
                                     <li class="post-like tooltip" title="Like this post">
                                         {LikeButton color="black" size="7"}
+                                        <i class="fa fa-heart"></i>
                                     </li>
                                     <li class="post-reblog tooltip" title="Reblog this post">
                                         <a href="{ReblogURL}"><i class="fa fa-lg fa-retweet"></i></a>
@@ -821,7 +852,7 @@
         <script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
         <script src="http://static.tumblr.com/evx2wil/a30o5wt2k/plugins.js"></script>
         <script src="http://static.tumblr.com/evx2wil/zW6o5ykqo/modal.js"></script>
-        <script src="http://static.tumblr.com/evx2wil/bhpo5zll7/ants.js"></script>
+        <script src="http://static.tumblr.com/evx2wil/3wjo658nz/ants.js"></script>
         <script type="text/javascript">
             (function($) {
                 $(document).ready(function(){
@@ -855,6 +886,16 @@
                         } else {
                             stickyTarget.removeClass(stickyClass);
                         }
+                    });
+                    $( "li.post-like" ).each(function( index ) {
+                        var likeSvg = $(this).find('.fa');
+                        $(this).find(".like_button").append(likeSvg);
+                    });
+                    $("li.post-reblog:not(.done)").each(function( index ) {
+                        $(this).addClass('done');
+                        $(this).find('a svg').remove();
+                        var reblogSvg = $(this).find('svg.dual-reblog');
+                        $(this).find("a.reblog_button").append(reblogSvg);
                     });
                 });
             })(window.jQuery);
